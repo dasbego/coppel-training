@@ -1,2 +1,3 @@
 # Colaboradores
-Usuario 2  
+Usuario 2
+Guillermo Beltran
