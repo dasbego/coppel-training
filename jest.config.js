@@ -11,7 +11,8 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest'
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(babel-jest|jest-vue-preprocessor)/)'
+    'node_modules/(?!(babel-jest|jest-vue-preprocessor)/)',
+    '/node_modules/'
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
