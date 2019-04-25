@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductsList Component Matches snapshot 1`] = `
+<div>
+  <div>My products</div>
+  <productform-stub></productform-stub>
+  <ul class="ProductsList">
+    <div>Cargando...</div>
+  </ul>
+  <div>Total productos: 0</div>
+  <div>Total a pagar: $0</div>
+</div>
+`;
