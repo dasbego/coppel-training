@@ -1,6 +1,9 @@
 <template>
   <div class="ProductItem--Inline">
-    <div :class="[bgColor, txtColor]">
+    <div
+      @click="goToProductDetail(product.id)"
+      :class="[bgColor, txtColor]"
+    >
       {{ product.name }} ({{ product.quantity }})
     </div>
     <div> 
@@ -19,13 +22,22 @@ export default {
   name: "ProductItem",
   props: {
     product: Object,
-    id: Number,
     addToShopCart: Function,
   },
   data () {
     return {
       bgColor: "ProductItem--bgColor-green",
       txtColor: "ProductItem__Text--white",
+    }
+  },
+  methods: {
+    goToProductDetail (id) {
+      this.$router.push({
+        name: 'productDetail',
+        params: {
+          id,
+        }
+      });
     }
   },
   filters: {

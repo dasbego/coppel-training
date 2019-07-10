@@ -7,7 +7,7 @@
     <ul class="ProductsList">
       <div v-if="filteredProducts.length === 0">Cargando...</div>
       <li class="ProductsList__Item" v-for="product in filteredProducts" :key="product.id" >
-        <ProductItem :product="product" :addToShopCart="agregarACarrito" /> 
+        <ProductItem :product="product" :addToShopCart="addToCart" /> 
       </li>
     </ul>
     <div>Total productos: {{ totalCantidad }}</div>
@@ -16,30 +16,23 @@
 </template>
 
 <script>
-import ProductItem from './ProductItem.vue';
-import ProductForm from './ProductForm.vue';
-import * as Filters from '@/utils/filters';
-import Axios from 'axios';
+import ProductItem from './ProductItem.vue'
+import ProductForm from './ProductForm.vue'
+import { mapState, mapMutations } from 'vuex'
+import * as Filters from '@/utils/filters'
 
 export default {
   name: 'ProductsList',
   data () {
     return {
-      title: 'My products',
-      products: [],
+      title: 'My products'
     }
   },
-  created () {
-    Axios.get('https://api.myjson.com/bins/hoto8')
-    .then((response) => {
-      this.products = response.data.products;
-    })
-    .catch((err) => {
-      // El manejo del error
-      console.log(err);
-    });
+  methods: {
+    ...mapMutations(['addToCart', 'addNewProduct'])
   },
   computed: {
+    ...mapState(['products']),
     filteredProducts (){
       return this.products
         .filter(product => (product.id >= 3))
@@ -58,27 +51,6 @@ export default {
       return this.filteredProducts.reduce((total, product) => {
         return total + (product.price * product.quantity);
       }, 0);
-    }
-  },
-  methods: {
-    agregarACarrito (price, id) {
-      this.products = this.products.map((product) => {
-        if (product.id === id) {
-          return {
-            // Copia del contenido de producto
-            ...product,
-            quantity: product.quantity + 1,
-          }
-        }
-        return product;
-      });
-    },
-    addNewProduct (newProduct) {
-      debugger;
-      this.products.push({
-        id: this.products.length + 1,
-        ...newProduct,
-      });
     }
   },
   filters: {

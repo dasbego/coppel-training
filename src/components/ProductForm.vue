@@ -38,7 +38,6 @@ export default {
     onSubmit () {
       this.$validator.validate().then(valid => {
         if (valid) {
-          debugger;
           const newProduct = {
             name: this.productName,
             price: this.productPrice,

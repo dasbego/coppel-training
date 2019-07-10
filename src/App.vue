@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <ProductsList msg="Welcome to Your Vue.js App"/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import ProductsList from './components/ProductsList.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'MyApp',
-  components: {
-    ProductsList
+  created () {
+    this.fetchProducts()
+  },
+  methods: {
+    ...mapActions(['fetchProducts'])
   }
 }
 </script>
